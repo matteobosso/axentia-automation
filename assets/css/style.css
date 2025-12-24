@@ -13,7 +13,7 @@ Version: 1.0
     2.1 Fonts
     2.2 Base
     2.3 Tables
-    2.4 Typography
+    2.4 Typography.0
 3. Layouts
     3.1 Grid
     3.2 Gutters
@@ -48,8 +48,8 @@ Version: 1.0
     --heading-font-family: "Montserrat";
     --heading-font-weight: 700;
     --heading-line-height: 1.3;
-    --additional-font-family: "Playfair Display";
-    --accent: #DB3700;
+    --additional-font-family: "Source Sans Pro";
+    --accent: #838383;
     --background: #ffffff;
     --text-primary: #151515;
     --link: #3267B5;
@@ -2204,6 +2204,14 @@ hr {
     font-size: 1.75rem;
 }
 
+.item-heading-large-b {
+    font-size: 2.75rem;
+}
+
+.item-heading-b {
+    font-size: 1.375rem;
+}
+
 .item-desc {
     margin: -0.5rem 0 1.25rem 0;
 }
@@ -3012,7 +3020,7 @@ hr {
     font-family: var(--additional-font-family), serif;
     line-height: 1;
     font-size: 1.5rem;
-    font-style: italic;
+    font-style: default;
     color: var(--accent);
 }
 
@@ -3034,7 +3042,7 @@ hr {
 .accordion-content {
     display: none;
     max-width: 830px;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     padding-top: 1rem;
     padding-right: 1rem;
 }
@@ -3120,7 +3128,7 @@ hr {
 
 @media (min-width: 1200px) {
     .accordion-heading {
-        font-size: 2.75rem;
+        font-size: 2rem;
         line-height: 1.2;
     }
 
@@ -3246,6 +3254,7 @@ hr {
     width: 1em;
     height: 1em;
 }
+
 
 /* === 6. Sections === */
 /* 6.1 Intro */
@@ -3499,11 +3508,11 @@ a.iitem {
     .iitem-numb-abs {
         display: block;
         position: absolute;
-        top: 2.5rem;
+        top: 0.5rem;
         left: -7rem;
         height: 6rem;
         width: 8rem;
-        line-height: 0.5;
+        line-height: 0.75;
         text-align: right;
         font-family: var(--additional-font-family), serif;
         font-size: 5.5rem;
@@ -3606,6 +3615,68 @@ a.iitem {
 }
 
 /* 6.5 Brands */
+
+
+.brand-item.selected {
+  border-color: var(--accent);
+  border-width: 4px;
+}
+
+
+/* Box descrizione */
+.brand-description {
+  margin-left: 2px;
+  padding: 1.5rem;
+  min-height: 14rem;
+  background-color: var(--background);
+  text-align: left;
+
+  /* animazione */
+  opacity: 0;                 /* parte nascosta */
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease, border-color 1s ease;
+}
+
+/* Stato visibile (fade-in + slide) */
+.brand-description.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  border-color: var(--accent); /* opzionale: evidenzia */
+}
+
+/* Stato nascosto (fade-out) */
+.brand-description.is-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Tipografia interna (come da tuo stile h2, h3, p) */
+.brand-description h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+.brand-description h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+.brand-description p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+
+
+.bw-img {
+    filter: grayscale(100%);
+}
+
+
 .brand-item {
     position: relative;
     display: flex;
@@ -3616,6 +3687,7 @@ a.iitem {
 .brand-item:hover {
     z-index: 1;
     border-color: var(--accent);
+    border-width: 4px;
 }
 
 .brand-item img {
@@ -3624,15 +3696,15 @@ a.iitem {
     top: 50%;
     transform: translate(-50%, -50%);
     display: block;
-    max-width: 50%;
-    max-height: 50%;
+    max-width: 70%;
+    max-height: 70%;
     height: auto;
 }
 
 /* === 7. Media === */
 @media (min-width: 768px) {
     .section {
-        padding: 5rem 0;
+        padding: 3.5rem 0;
     }
 
     .section-heading {

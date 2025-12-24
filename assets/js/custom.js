@@ -44,6 +44,53 @@
 
 			window.addEventListener('scroll', app.toggleHeaderElements);
 
+
+			// === Brand description (hover desktop + tap mobile) === \\\\\\
+			const brandArea = document.querySelector('.brand-area');
+			const brandItems = document.querySelectorAll('.brand-area .brand-item');
+			const brandDescBox = document.getElementById('brand-description');
+
+			if (brandArea && brandItems.length && brandDescBox) {
+			const defaultHtml = brandDescBox.innerHTML;
+
+			const showDesc = (html) => {
+				brandDescBox.innerHTML = html || defaultHtml;
+				brandDescBox.classList.add('is-visible');
+				brandDescBox.classList.remove('is-hidden');
+			};
+			const resetDesc = () => {
+				brandDescBox.innerHTML = defaultHtml;
+				brandDescBox.classList.remove('is-visible');
+				brandDescBox.classList.add('is-hidden');
+			};
+
+			// Hover (desktop)
+			brandItems.forEach(item => {
+				item.addEventListener('mouseenter', () => {
+				if (window.innerWidth > 768) showDesc(item.dataset.description);
+				});
+				item.addEventListener('mouseleave', () => {
+				if (window.innerWidth > 768) resetDesc();
+				});
+
+				// Tap (mobile)
+				item.addEventListener('click', () => {
+				if (window.innerWidth <= 768) showDesc(item.dataset.description);
+				});
+
+				// Accessibilità: focus da tastiera su desktop
+				item.setAttribute('tabindex', '0');
+				item.addEventListener('focus', () => {
+				if (window.innerWidth > 768) showDesc(item.dataset.description);
+				});
+				item.addEventListener('blur', () => {
+				if (window.innerWidth > 768) resetDesc();
+				});
+			});
+			}
+
+
+
 		},
 
 		//=== Start page ===\\

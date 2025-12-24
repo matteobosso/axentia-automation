@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Specifica la posizione della sitemap per aiutare l'indicizzazione
+Sitemap: https://axentia-automation.it/sitemap.xml

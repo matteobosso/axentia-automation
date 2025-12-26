@@ -2045,7 +2045,7 @@ hr {
 .section-heading h1, .section-heading h2 {
     position: relative;
     text-transform: uppercase;
-    font-size: 2.7rem;
+    font-size: 2rem;
     margin: 0;
     font-kerning: none;
 }
@@ -3757,7 +3757,7 @@ a.iitem {
 
 @media (min-width: 1200px) {
     .section-heading h1, .section-heading h2 {
-        font-size: 5rem;
+        font-size: 4rem;
     }
 
     .section-footer-content {

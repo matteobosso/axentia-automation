@@ -54,14 +54,21 @@
 			const defaultHtml = brandDescBox.innerHTML;
 
 			const showDesc = (html) => {
-				brandDescBox.innerHTML = html || defaultHtml;
-				brandDescBox.classList.add('is-visible');
-				brandDescBox.classList.remove('is-hidden');
+				brandDescBox.classList.add('fade-out'); // Inizia a sparire
+
+				setTimeout(() => {
+					brandDescBox.innerHTML = html; // Cambia testo mentre è invisibile
+					brandDescBox.classList.remove('fade-out'); // Riappare con il nuovo testo
+				}, 300); // Tempo coordinato con la transizione CSS
 			};
+
 			const resetDesc = () => {
-				brandDescBox.innerHTML = defaultHtml;
-				brandDescBox.classList.remove('is-visible');
-				brandDescBox.classList.add('is-hidden');
+				brandDescBox.classList.add('fade-out');
+
+				setTimeout(() => {
+					brandDescBox.innerHTML = defaultHtml; // Torna al default
+					brandDescBox.classList.remove('fade-out');
+				}, 300);
 			};
 
 			// Hover (desktop)

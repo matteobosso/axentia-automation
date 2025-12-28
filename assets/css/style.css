@@ -1618,10 +1618,18 @@ hr {
     left: 0;
     width: 100%;
     z-index: 111;
-    padding: 1.25rem 0 0;
+    /* Aumentiamo il padding o l'altezza minima per dare spazio alla sfumatura */
+    padding: 1.25rem 0 6rem; 
     font-family: var(--heading-font-family), sans-serif;
     font-size: 1rem;
     color: var(--text-primary);
+    
+    /* Il bianco solido copre solo il top, la trasparenza inizia molto presto */
+    background: linear-gradient(to top, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.8) 80%, 
+        rgba(255, 255, 255, 1) 100%
+    );
 }
 
 .header-brand {
@@ -3632,9 +3640,11 @@ a.iitem {
   text-align: left;
 
   /* animazione */
-  opacity: 0;                 /* parte nascosta */
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease, border-color 1s ease;
+  opacity: 1; 
+  transform: translateY(0);
+  /* Aumentato a 0.5s per un fade più dolce */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, border-color 0.5s ease;
+  overflow: hidden;
 }
 
 /* Stato visibile (fade-in + slide) */
@@ -3645,9 +3655,9 @@ a.iitem {
 }
 
 /* Stato nascosto (fade-out) */
-.brand-description.is-hidden {
+.brand-description.fade-out {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(10px);
 }
 
 /* Tipografia interna (come da tuo stile h2, h3, p) */

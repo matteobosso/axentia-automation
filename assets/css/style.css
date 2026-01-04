@@ -36,6 +36,9 @@ Version: 1.0
     6.4 Contacts
     6.5 Brands
 7. Media
+8. Animations
+9. Form
+10 Cookies
 
 === */
 /* === 0. Root === */
@@ -48,8 +51,8 @@ Version: 1.0
     --heading-font-family: "Montserrat";
     --heading-font-weight: 700;
     --heading-line-height: 1.3;
-    --additional-font-family: "Source Sans Pro";
-    --accent: #838383;
+    --additional-font-family: "Playfair Display";
+    --accent: #ff524f;
     --background: #ffffff;
     --text-primary: #151515;
     --link: #3267B5;
@@ -1619,17 +1622,17 @@ hr {
     width: 100%;
     z-index: 111;
     /* Aumentiamo il padding o l'altezza minima per dare spazio alla sfumatura */
-    padding: 1.25rem 0 6rem; 
+    /* padding: 1.25rem 0 6rem; 
     font-family: var(--heading-font-family), sans-serif;
     font-size: 1rem;
-    color: var(--text-primary);
+    color: var(--text-primary); */
     
     /* Il bianco solido copre solo il top, la trasparenza inizia molto presto */
-    background: linear-gradient(to top, 
+    /* background: linear-gradient(to top, 
         rgba(255, 255, 255, 0) 0%, 
         rgba(255, 255, 255, 0.8) 80%, 
         rgba(255, 255, 255, 1) 100%
-    );
+    ); */
 }
 
 .header-brand {
@@ -3490,6 +3493,20 @@ a.iitem {
 
 .iitem-numb-abs {
     display: none;
+    /* Forza solo l'overflow verticale */
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    display: flex !important;
+
+    /* MODIFICA: Alziamo la posizione globale per evitare che la base tocchi il fondo */
+    position: absolute;
+    top: 30%; /* Era 50%, lo alziamo un po' per dare spazio alla base dei numeri */
+    left: 0;
+    width: 100%;
+    
+    /* MODIFICA: Forza un'altezza minima per contenere il font gigante */
+    height: 150px !important; 
+    pointer-events: none;
 }
 
 @media (min-width: 480px) {
@@ -3544,13 +3561,17 @@ a.iitem {
     }
 
     .iitem-numb-abs span {
-        display: block;
-        height: 100%;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    display: block;
+    /* Manteniamo la tua struttura */
+    position: absolute;
+    right: 0;
+    
+    /* MODIFICA: Cruciale per non croppare sotto */
+    height: auto; /* Togliamo 100% che costringe lo span nel box stretto */
+    line-height: 0.5; /* Compatta il box del font */
+    padding-bottom: 100px !important; /* Aumentato per l'1 e il 3 */
+    
+}
 
     .iitem-numb-abs.iitem-numb-abs-6, .iitem-numb-abs.iitem-numb-abs-8, .iitem-numb-abs.iitem-numb-abs-16, .iitem-numb-abs.iitem-numb-abs-18, .iitem-numb-abs.iitem-numb-abs-26, .iitem-numb-abs.iitem-numb-abs-28 {
         line-height: 0.7;
@@ -3592,7 +3613,7 @@ a.iitem {
 
 .map {
     position: relative;
-    height: 400px;
+    height: 300px;
 }
 
 .map::after {
@@ -3618,7 +3639,7 @@ a.iitem {
 
 @media (min-width: 768px) {
     .map {
-        height: 500px;
+        height: 350px;
     }
 }
 
@@ -3627,7 +3648,7 @@ a.iitem {
 
 .brand-item.selected {
   border-color: var(--accent);
-  border-width: 4px;
+  border-width: 2px;
 }
 
 
@@ -3697,7 +3718,7 @@ a.iitem {
 .brand-item:hover {
     z-index: 1;
     border-color: var(--accent);
-    border-width: 4px;
+    border-width: 2px;
 }
 
 .brand-item img {
@@ -3831,4 +3852,320 @@ a.iitem {
     body {
         font-size: var(--font-size);
     }
+}
+
+/* 8 Custom animations */
+/* --- BASE --- */
+.reveal-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.reveal-item {
+    display: inline-block;
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-item.reveal-active {
+    opacity: 1;
+    transform: translate(0, 0) !important;
+}
+
+/* --- WORD SPECIFIC (Per il Titolo) --- */
+.reveal-word-wrapper {
+    display: inline-flex !important;
+    overflow: hidden;
+    vertical-align: top;
+    /* Aggiungi questo: */
+    padding-top: 0.1em;
+    padding-bottom: 0.2em;
+    margin-top: -0.1em;
+    margin-bottom: -0.2em;
+}
+
+.reveal-word-wrapper .reveal-item {
+    display: inline-block;
+    white-space: nowrap;
+    /* Assicura che la parola non sia mai tagliata lateralmente */
+    padding-right: 0.05em; 
+}
+
+/* --- BLOCK SPECIFIC (Tutto insieme) --- */
+.reveal-block-wrapper {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* --- BTN SPECIFIC (Per i bottoni) --- */
+/* Qualsiasi elemento SVG che deve essere svelato */
+svg .reveal-item {
+    fill: none !important; /* Spesso gli SVG "disegnati" non devono avere riempimento inizialmente */
+    stroke-dashoffset: var(--dash-length, 1000); /* Fallback */
+    opacity: 1 !important; /* L'effetto si basa sullo stroke, non sull'opacità */
+}
+
+/* Quando l'observer attiva la classe */
+svg .reveal-item.reveal-active {
+    stroke-dashoffset: 0 !important;
+}
+
+/* Selettore specifico per i tracciati che devono essere disegnati */
+.reveal-item-svg {
+    fill: none !important;
+    stroke: var(--text-primary); /* Assicurati che il colore sia visibile */
+    stroke-width: 2px;          /* Spessore necessario per vedere il disegno */
+    opacity: 0;
+    /* Specifichiamo cosa animare */
+    transition-property: stroke-dashoffset, opacity !important;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-item-svg.reveal-active {
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+}
+
+/* Classe per resettare l'SVG allo stato invisibile */
+.reveal-svg-path {
+    fill: none !important;
+    stroke: var(--text-primary);
+    stroke-width: 2px;
+    /* Forza lo stato iniziale: opaco 0 e offset enorme */
+    opacity: 0.5;
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+
+/* Stato attivo */
+.reveal-svg-path.is-animated {
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+}
+
+.iitem:hover .reveal-svg-path,
+svg:hover .reveal-svg-path {
+    stroke: var(--accent-color) !important; /* Forza il colore accent */
+}
+
+/* === LINES === */
+.sh-line-container {
+    width: 100%;margin: 0; /* Assicurati che non ci siano margini qui */
+    padding: 0; /* E nemmeno padding */
+    height: 2px; /* Forza un'altezza minima al div */
+    display: block;
+    overflow: hidden;
+}
+
+.sh-line-container svg {
+    display: block;margin: 0; /* Assicurati che non ci siano margini qui */
+    padding: 0; /* E nemmeno padding */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Inverte l'orientamento dell'SVG per far partire il disegno da destra */
+.sh-line-container.dir-left svg {
+    transform: scaleX(-1) !important;
+    transform-origin: center;
+    display: block;
+}
+
+.sh-line-container svg path {
+    /* Usa un colore esplicito (es. #000) se var(--text-primary) non è definito */
+    stroke: var(--text-primary, #000000); 
+    stroke-width: 2px; /* Leggermente più spesso per il test, poi lo cali a 1px */
+    fill: none !important;
+    vector-effect: non-scaling-stroke; /* Mantiene lo spessore 1px anche se l'SVG si allunga */
+    transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === FADE === */
+/* Stato iniziale */
+.reveal-fade-in {
+    opacity: 0 !important;
+    /* Transizione fluida su opacità e trasformazione */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+}
+
+/* Stato attivo applicato dall'observer */
+.reveal-fade-in.reveal-active {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+}
+
+
+/* === SECTION CONTACT (AXENTIA STYLE) === */
+.section-contact {
+    padding: 0; /* Rimosso il padding eccessivo che spingeva tutto in basso */
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Campi del form con linea sottile */
+.form-field {
+    position: relative;
+    margin-bottom: 25px; /* Spazio ridotto tra i campi */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: border-color 0.4s ease;
+}
+
+.form-field:focus-within {
+    border-bottom-color: #000;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    opacity: 0.4;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    border: none !important; /* Forza la rimozione dei bordi default */
+    background: transparent;
+    padding: 8px 0;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: none !important;
+}
+
+/* Privacy Policy */
+.privacy-field {
+    border-bottom: none !important;
+    margin-bottom: 0;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #d83b01;
+    cursor: pointer;
+}
+
+.checkbox-wrapper a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+/* Correzione per la riga finale: distanzia checkbox dal bottone */
+.row.align-items-center {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0px;
+}
+
+/* === BOTTONE SUBMIT CIRCOLARE === */
+.btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #d83b01; 
+    color: #ffffff;
+    
+    border: none;
+    border-radius: 50%;
+    
+    width: 130px; /* Dimensione leggermente ridotta per bilanciare il design */
+    height: 130px;
+    min-width: 130px;
+    
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    margin-top: -20px; /* Sposta il bottone leggermente verso l'alto per allinearlo visivamente */
+}
+
+.btn-submit:hover {
+    transform: scale(0.9); /* Restringimento on hover */
+}
+
+.btn-submit:active {
+    transform: scale(0.85);
+}
+
+/* Messaggio di Successo */
+.form-success-hidden {
+    display: none;
+    text-align: left;
+    padding: 30px 0;
+}
+
+/* Gestione visibilità post-invio */
+.form-success-visible.hidden {
+    display: none !important;
+}
+
+.form-success-hidden.visible {
+    display: block !important;
+}
+/* Error Handling */
+.pristine-error {
+    color: #d83b01; /* Rosso Axentia */
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-weight: bold;
+}
+.form-field.error {
+    border-bottom-color: #d83b01 !important;
+}
+
+/* Stile per il messaggio di errore di Pristine */
+.error .pristine-error {
+    font-size: 0.7rem;
+    color: #d83b01; /* Rosso Axentia */
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Evidenzia il campo con errore */
+.form-field.error {
+    border-bottom-color: #d83b01 !important;
+}
+
+/* Nasconde l'errore se il campo torna valido */
+.success .pristine-error {
+    display: none;
+}
+
+
+/* === 10. COOKIES NOTICE === */
+/* Arrotonda gli angoli e pulisce l'ombra */
+#cc--main .cm {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    border: 1px solid #eee !important;
+}
+
+/* Colore bottone principale (Personalizzalo con il brand Axentia) */
+#cc--main .c-bn {
+    border-radius: 8px !important;
+}
+
+#cc--main .cm__btn--primary {
+    background-color: #000 !important; /* Colore nero minimal */
 }

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
         
-    <link rel="icon" href="assets/img/favicon/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" href="assets/img/favicon/favicon-48x48.png" sizes="48x48"/>
     <link rel="icon" href="assets/img/favicon/favicon-192x192.png" sizes="192x192"/>
     <link rel="apple-touch-icon" href="assets/img/favicon/favicon-180x180.png"/>
 
@@ -23,14 +23,18 @@
 <link rel="preload" href="assets/fonts/playfair-display-v30-latin/playfair-display-v30-latin-900.woff2" as="font" type="font/woff2" crossorigin>
 
 </head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6MMD9Q21B"></script>
-<script>
+<!-- Cookie Consent Scripts -->
+<script type="text/plain" data-cookiecategory="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-X6MMD9Q21B"></script>
+<script type="text/plain" data-cookiecategory="analytics">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-X6MMD9Q21B');
 </script>
+<link rel="stylesheet" href="assets/css/cookieconsent.css">
+<script src="assets/js/cookieconsent.js"></script>
+<script src="assets/js/cookie-config.js"></script>
+<!-- End Cookie Consent Scripts -->
 
 <body>
 
@@ -100,8 +104,12 @@
 					<div class="row">
 						<div class="col-md-5_6 offset-md-1_6">
 							<div class="section-heading">
-								<h1>DOMANDE FREQUENTI</h1>
-								<div class="sh-line"></div>
+								<h1 id="title-block">DOMANDE FREQUENTI</h1>
+								<div class="sh-line-container">
+                                    <svg width="100%" height="10" viewBox="0 0 1100 100" preserveAspectRatio="none">
+                                        <path d="M1100,5 L0,5"></path>
+                                    </svg>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -110,7 +118,7 @@
 							<div class="accordion">
     <ul class="list-style-none accordion-list">
         
-        <li class="accordion-item active">
+        <li class="accordion-item active" id="body-block">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">01.</div></div>
@@ -127,7 +135,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-1">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">02.</div></div>
@@ -144,7 +152,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-2">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">03.</div></div>
@@ -161,7 +169,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-3">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">04.</div></div>
@@ -178,7 +186,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-4">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">05.</div></div>
@@ -195,7 +203,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-5">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">06.</div></div>
@@ -212,7 +220,7 @@
     </div>
 </li>
 
-<li class="accordion-item">
+<li class="accordion-item" id="faq-6">
     <div class="row gy-0">
         <div class="col-md-1_3">
             <div class="accordion-counter-outer"><div class="accordion-counter">07.</div></div>
@@ -240,28 +248,7 @@
 		<!-- Begin footer -->
 <footer class="footer footer-fixed">
     <div class="footer-container">
-		<!--
-        <nav class="social-links-nav">
-            <ul class="social-links">
-                <li>
-                    <a href="#!" class="crm" aria-label="Twitter" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#!" class="crm" aria-label="Facebook" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#!" class="crm" aria-label="Linkedin" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-		-->
-        <div class="copyright">© 2025 - Axentia Lean Automation</div>
+		<div class="copyright">© 2025 - Axentia Lean Automation</div><div class="copyright" style="opacity: 0.5; margin-left: 1rem;">| Design by <a href="https://kovalweb.com" target="_blank" style="color: inherit; text-decoration: none;">KovalWeb</a></div>
     </div>
 </footer><!-- End footer -->
 
@@ -277,31 +264,6 @@
 
 <div class="preloader active"><div></div></div>
 
-
-<!--
-<div class="template open">
-    <div class="container">
-        <div class="template-container">
-            <div class="template-heading">Get full-featured SLE template</div>
-            <div class="template-desc">
-                Lots of different sections, amazing animations and many more 
-                <a class="crs template-buy"
-                    href="https://www.templatemonster.com/website-templates/sle-clean-minimalist-multipurpose-html5-template-220859.html?utm_campaign=blog_site_KovalWeb&amp;utm_source=KovalWeb&amp;utm_medium=referral&amp;aff=KovalWeb"
-                    aria-label="HTML5" rel="noopener">
-                    HTML5
-                </a>
-                &nbsp;or&nbsp;
-                <a class="crs template-buy"
-                    href="https://www.templatemonster.com/wordpress-themes/sle-clean-minimalist-multipurpose-wordpress-theme-308603.html?utm_campaign=blog_site_KovalWeb&amp;utm_source=KovalWeb&amp;utm_medium=referral&amp;aff=KovalWeb"
-                    aria-label="WordPress" rel="noopener">
-                    WordPress
-                </a> 
-            </div>
-        </div>
-    </div>
-</div>
--->
-
 <nav class="spf main-menu">
     <div class="mm-container">
         <div></div>
@@ -314,24 +276,6 @@
                                 <li>
                                     <a data-title="Home" href="index.html"><span>Home</span></a>
                                 </li>
-                                <!-- <li>
-                                    <a data-title="About" href="about.html"><span>About</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Services" href="services.html"><span>Services</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Typography" href="typography.html"><span>Typography</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Tabs & Accordions" href="tabs-and-accordions.html"><span>Tabs & Accordions</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Contact" href="contact.html"><span>Contact</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Documentation" href="docs.html"><span>Documentation</span></a>
-                                </li> -->
                                 <li>
                                     <a data-title="Chi Siamo" href="chi-siamo.html"><span>Chi Siamo</span></a>
                                 </li>
@@ -344,49 +288,6 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- <div class="col-md-1_3">
-                        <div class="mm-contacts">
-                            <div class="mmc-item">
-                                <div class="mmc-label">Address:</div>
-                                <ul class="mmc-list">
-                                    <li><a href="https://goo.gl/maps/zDnHrjo5hUooH84t7" rel="noopener nofollow">4730 Crystal Springs Dr, Los Angeles, CA</a></li>
-                                </ul>
-                            </div>
-                            <div class="mmc-item">
-                                <div class="mmc-label">Phones:</div>
-                                <ul class="mmc-list">
-                                    <li><a href="#!" class="formingHrefTel crs">+1 323-913-4688</a></li>
-                                    <li><a href="#!" class="formingHrefTel crs">+1 323-888-4554</a></li>
-                                </ul>
-                            </div>
-                            <div class="mmc-item">
-                                <div class="mmc-label">Emails:</div>
-                                <ul class="mmc-list">
-                                    <li><a href="mailto:mail@example.com">mail@example.com</a></li>
-                                    <li><a href="mailto:info@example.com">info@example.com</a></li>
-                                </ul>
-                            </div>
-                            <div class="mmc-item">
-                                <ul class="social-links mm-social">
-                                    <li>
-                                        <a href="#!" class="crm" aria-label="Twitter" rel="noopener nofollow">
-                                            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#!" class="crm" aria-label="Facebook" rel="noopener nofollow">
-                                            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#!" class="crm" aria-label="Linkedin" rel="noopener nofollow">
-                                            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

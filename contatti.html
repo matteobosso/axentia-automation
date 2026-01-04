@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
         
-    <link rel="icon" href="assets/img/favicon/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" href="assets/img/favicon/favicon-48x48.png" sizes="48x48"/>
     <link rel="icon" href="assets/img/favicon/favicon-192x192.png" sizes="192x192"/>
     <link rel="apple-touch-icon" href="assets/img/favicon/favicon-180x180.png"/>
 
@@ -23,16 +23,73 @@
 <link rel="preload" href="assets/fonts/playfair-display-v30-latin/playfair-display-v30-latin-900.woff2" as="font" type="font/woff2" crossorigin>
 
 </head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X6MMD9Q21B"></script>
-<script>
+
+<!-- Cookie Consent Scripts -->
+<script type="text/plain" data-cookiecategory="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-X6MMD9Q21B"></script>
+<script type="text/plain" data-cookiecategory="analytics">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-X6MMD9Q21B');
 </script>
+<link rel="stylesheet" href="assets/css/cookieconsent.css">
+<script src="assets/js/cookieconsent.js"></script>
+<script src="assets/js/cookie-config.js"></script>
+<!-- End Cookie Consent Scripts -->
 
 <body>
+
+    <!-- Firebase and Form Scripts -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // Imposta il default come NEGATO
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied'
+        });
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7fdNXUgSw4VX8lN9bvbt34htyaxu5pPs",
+            authDomain: "axentia-website.firebaseapp.com",
+            projectId: "axentia-website",
+            storageBucket: "axentia-website.firebasestorage.app",
+            messagingSenderId: "315615355298",
+            appId: "1:315615355298:web:f7092567187e3fb69b92fb",
+            measurementId: "G-9YX0DC8XYD"
+        };
+
+        // 1. Inizializza l'App e il Database (Sempre attivi per il form)
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 2. Funzione per attivare Analytics solo al consenso
+        window.enableFirebaseAnalytics = function() {
+            // 1. Comunica a Google che ora ha il permesso
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
+
+            // 2. Inizializza Analytics (se non era già partito)
+            const analytics = getAnalytics(app);
+            console.log("Consenso aggiornato: Firebase Analytics ora può tracciare.");
+        };
+
+        // Rendi disponibili le funzioni per form.js
+        window.db = db;
+        window.addDoc = addDoc;
+        window.collection = collection;
+        window.serverTimestamp = serverTimestamp;
+    </script>
+    <script src="assets/libs/pristine/pristine.min.js"></script>
+    <script src="assets/js/form.js"></script>
+    <!-- End Firebase and Form Scripts -->
 
 	<main class="main">
 
@@ -94,56 +151,98 @@
 				</div>
 			</nav>
 			
-			<section class="section">
+			<section class="section" style="padding-top: 2rem;">
 				<div class="container">
-					<div class="row align-items-md-center">
-						<div class="col-md-5_6 offset-md-1_6">
-							<div class="section-heading">
-								<h1>Richiedi una consulenza gratuita</h1>
-								<div class="sh-line"></div>
-							</div>
-							<div class="row gy-3 section-trigger">
-								<div class="col-sm-1 col-lg-1_3">
-									<div class="contacts-item">
-										<div class="ci-heading">Ci trovi a:</div>
-										<ul class="list-style-none ci-list">
-											<li>
-												<a href="https://www.google.com/maps/place/12100+Cuneo+CN/@44.3920532,7.4737874,12z/data=!3m1!4b1!4m6!3m5!1s0x12cd6938c78138a7:0x135d6bcb1726e647!8m2!3d44.3844766!4d7.5426711!16zL20vMDN0bTZz?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" rel="noopener">
-													Cuneo
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<!-- <div class="col-sm-1_2 col-lg-1_3">
-									<div class="contacts-item">
-										<div class="ci-heading">TELEFONO:</div>
-										<ul class="list-style-none ci-list">
-											<li><a href="tel:+13239134688" class="formingHrefTel crs">+1 323-913-4688</a></li>
-										</ul>
-									</div>
-								</div> -->
-								<div class="col-sm-1_2 col-lg-1_3">
-									<div class="contacts-item">
-										<div class="ci-heading">EMAIL:</div>
-										<ul class="list-style-none ci-list">
-											<li><a href="mailto:info@example.com">info@axentia-automation.it</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-1">
-							<div class="map-outer">
-								<div class="map crh">
-									<iframe class="lazy" title="Contact map" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101462.4762969!2d7.4307223!3d44.4762969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cd427b12cfd279%3A0x305e67d473c7da0!2sProvincia%20di%20Cuneo!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"></iframe>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                    <div class="col-md-5_6 offset-md-1_6">
+                        <div class="section-heading">
+                            <h1  id="title-block">Richiedi una consulenza gratuita</h1>
+                            <div class="sh-line-container">
+                                <svg width="100%" height="2" viewBox="0 0 1100 100" preserveAspectRatio="none">
+                                    <path d="M1100,5 L0,5"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-1_2">
+                        <section class="section-contact">
+                            <div class="form-outer">
+                                <div class="form-success-visible">
+                                    <h2 id="contact-title" class="reveal-text">Mettiamoci in contatto</h2>
+                                    <form id="contact-form" novalidate>
+                                        <div class="form-field">
+                                            <label class="form-label">Nome</label>
+                                            <input type="text" name="user_name" class="form-control" 
+                                                required data-pristine-required-message="Il nome è obbligatorio">
+                                        </div>
+                                        <div class="form-field">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="user_email" class="form-control" 
+                                                required data-pristine-required-message="L'email è obbligatoria">
+                                        </div>
+                                        <div class="form-field">
+                                            <label class="form-label">Messaggio</label>
+                                            <textarea name="message" class="form-control" rows="1" 
+                                                    required data-pristine-required-message="Scrivi un messaggio"></textarea>
+                                        </div>
+                                        
+                                        <div class="form-field privacy-field">
+                                            <div class="checkbox-wrapper">
+                                                <input type="checkbox" name="privacy" id="privacy" class="form-control" 
+                                                    required data-pristine-required-message="Devi accettare la privacy policy">
+                                                <label for="privacy">Accetto la <a href="privacy-policy.html">Privacy Policy</a></label>
+                                            </div>
+                                            <div class="checkbox-wrapper">
+                                                <input type="checkbox" name="marketing" id="marketing" class="form-control">
+                                                <label for="marketing">Desidero tenermi aggiornato su Lean e Automazione.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1_2 offset-2_3" style="text-align: right;"><button type="submit" class="btn-submit">Invia</button></div>
+                                        
+                                    </form>
+                                </div>
+                                <div class="form-success-hidden">
+                                    <h3>Grazie!</h3>
+                                    <p>Ti risponderemo presto.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-1_2">
+                        <div class="row align-items-md-center">
+                            <div class="col-1">
+                                <div class="row gy-3 section-trigger" id="body-block">
+                                    <div class="col-sm-1 col-lg-1_3">
+                                        <div class="contacts-item">
+                                            <div class="ci-heading">Ci trovi a:</div>
+                                            <ul class="list-style-none ci-list">
+                                                <li><a href="#">Cuneo</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1_2 col-1_3">
+                                        <div class="contacts-item">
+                                            <div class="ci-heading">EMAIL:</div>
+                                            <ul class="list-style-none ci-list">
+                                                <li><a href="mailto:info@axentia-automation.it">info@axentia-automation.it</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <div class="map-outer">
+                                    <div class="map crh">
+                                        <iframe class="lazy" title="Contact map" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101462.4762969!2d7.4307223!3d44.4762969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cd427b12cfd279%3A0x305e67d473c7da0!2sProvincia%20di%20Cuneo!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</section>
 
 		</article>
@@ -151,28 +250,7 @@
 		<!-- Begin footer -->
 <footer class="footer footer-fixed">
     <div class="footer-container">
-		<!--
-        <nav class="social-links-nav">
-            <ul class="social-links">
-                <li>
-                    <a href="#!" class="crm" aria-label="Twitter" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#!" class="crm" aria-label="Facebook" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="#!" class="crm" aria-label="Linkedin" rel="noopener nofollow">
-                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-		-->
-        <div class="copyright">© 2025 - Axentia Lean Automation</div>
+        <div class="copyright">© 2025 - Axentia Lean Automation</div><div class="copyright" style="opacity: 0.5; margin-left: 1rem;">| Design by <a href="https://kovalweb.com" target="_blank" style="color: inherit; text-decoration: none;">KovalWeb</a></div>
     </div>
 </footer><!-- End footer -->
 
@@ -189,28 +267,6 @@
 
 <div class="preloader active"><div></div></div>
 
-<!-- <div class="template open">
-    <div class="container">
-        <div class="template-container">
-            <div class="template-heading">Get full-featured SLE template</div>
-            <div class="template-desc">
-                Lots of different sections, amazing animations and many more 
-                <a class="crs template-buy"
-                    href="https://www.templatemonster.com/website-templates/sle-clean-minimalist-multipurpose-html5-template-220859.html?utm_campaign=blog_site_KovalWeb&amp;utm_source=KovalWeb&amp;utm_medium=referral&amp;aff=KovalWeb"
-                    aria-label="HTML5" rel="noopener">
-                    HTML5
-                </a>
-                &nbsp;or&nbsp;
-                <a class="crs template-buy"
-                    href="https://www.templatemonster.com/wordpress-themes/sle-clean-minimalist-multipurpose-wordpress-theme-308603.html?utm_campaign=blog_site_KovalWeb&amp;utm_source=KovalWeb&amp;utm_medium=referral&amp;aff=KovalWeb"
-                    aria-label="WordPress" rel="noopener">
-                    WordPress
-                </a> 
-            </div>
-        </div>
-    </div>
-</div> -->
-
         <nav class="spf main-menu">
     <div class="mm-container">
         <div></div>
@@ -223,24 +279,6 @@
                                 <li>
                                     <a data-title="Home" href="index.html"><span>Home</span></a>
                                 </li>
-                                <!-- <li>
-                                    <a data-title="About" href="about.html"><span>About</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Services" href="services.html"><span>Services</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Typography" href="typography.html"><span>Typography</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Tabs & Accordions" href="tabs-and-accordions.html"><span>Tabs & Accordions</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Contact" href="contact.html"><span>Contact</span></a>
-                                </li>
-                                <li>
-                                    <a data-title="Documentation" href="docs.html"><span>Documentation</span></a>
-                                </li> -->
                                 <li>
                                     <a data-title="Chi Siamo" href="chi-siamo.html"><span>Chi Siamo</span></a>
                                 </li>

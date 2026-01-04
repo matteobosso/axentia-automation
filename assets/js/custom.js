@@ -96,7 +96,55 @@
 			});
 			}
 
+			//=== Reveal animations ===\\
 
+			//Index.HTML
+			//hero
+			app.revealWords('hero-title-1', 'up', false, 0.0, 0.1, 0.8);
+			app.revealBlock('hero-desc-1', 'left', false, 0.1, 0.8);
+			app.revealBlock('hero-desc-2', 'left', false, 0.2, 0.8);
+			app.revealBlock('hero-desc-3', 'left', false, 0.4, 0.8);
+			app.revealBlock('hero-desc-4', 'left', false, 0.5, 0.8);
+			app.revealSvg('svg-1', false, 0.0, 1.5, 0.4);
+			app.revealSvg('svg-2', false, 0.2, 1.5, 0.4);
+			//vision
+			app.revealBlock('vision-1', 'left', true, 0.2, 0.6);
+			app.revealBlock('vision-2', 'left', true, 0.2, 0.6);
+			app.revealShLine('line-1','left', true, 0.0, 0.8);
+			app.revealBlock('vision-desc', 'up', true, 0.2, 0.8);
+			app.revealFade('vision-cit', true, 0.2, 1, 'none');
+			//services
+			app.revealBlock('services-title', 'right', true, 0.2, 0.6);
+			app.revealBlock('services-desc', 'right', true, 0.2, 0.6);
+			app.revealShLine('services-line','right', true, 0.0, 0.8);
+			app.revealBlock('service-1-1', 'up', true, 0.0, 0.8);
+			app.revealBlock('service-2-1', 'up', true, 0.2, 0.8);
+			app.revealBlock('service-3-1', 'up', true, 0.4, 0.8);
+			app.revealBlock('service-1-2', 'left', true, 0.0, 1);
+			app.revealBlock('service-2-2', 'left', true, 0.2, 1);
+			app.revealBlock('service-3-2', 'left', true, 0.4, 1);
+			//automation
+			app.revealBlock('auto-title', 'right', true, 0.2, 0.6);
+			app.revealShLine('auto-line','right', true, 0.0, 0.8);
+			//CTA
+			app.revealBlock('cta-title', 'right', true, 0.2, 0.8);
+			app.revealBlock('cta-desc', 'right', true, 0.2, 0.8);
+			app.revealSvg('cta-btn-1', true, 0.2, 1.5, 0.4);
+			app.revealSvg('cta-btn-2', true, 0.2, 1.5, 0.4);
+
+			//Chi-siamo.HTML / Contatti.HTML
+			//Body
+			app.revealBlock('title-block','up', true, 0.0, 1.2);
+			app.revealFade('body-block', true, 0.0, 1.2,'none');
+
+			//FAQs.HTML
+			//FAQs items
+			app.revealFade('faq-1', true, 0.0, 0.7,'up');
+			app.revealFade('faq-2', true, 0.0, 0.7,'up');
+			app.revealFade('faq-3', true, 0.0, 0.7,'up');
+			app.revealFade('faq-4', true, 0.0, 0.7,'up');
+			app.revealFade('faq-5', true, 0.0, 0.7,'up');
+			app.revealFade('faq-6', true, 0.0, 0.7,'up');
 
 		},
 
@@ -422,7 +470,7 @@
 			}
 
 		},
-
+		
 		customLog: () => {
 
 			const styles = [
@@ -438,11 +486,200 @@
 					//'padding: 4px 8px 4px 0',
 					'font-weight: bold'
 				].join(';'),
-				text = '%cby %cSpecia1ne';
+				text = '%cby %cAxentia lean Automation - www.axentia-automation.it';
 
 			console.log(text, styles, brandStyles);
 
 		},
+
+		revealWords: (elementId, direction = 'up', onScroll = true, startDelay = 0, stagger = 0.05, duration = 0.8) => {
+			const container = document.getElementById(elementId);
+			if (!container) return;
+
+			// Filtra per evitare spazi vuoti multipli che rompono il layout
+			const words = container.innerText.trim().split(/\s+/);
+			container.innerHTML = '';
+			
+			words.forEach((word, index) => {
+				const wrapper = document.createElement('span');
+				wrapper.className = 'reveal-word-wrapper';
+
+				const span = document.createElement('span');
+				span.className = 'reveal-item';
+				span.innerText = word;
+				
+				span.style.transitionDuration = `${duration}s`;
+				span.style.transitionDelay = `${startDelay + (index * stagger)}s`;
+				span.style.transform = app.getStartTransform(direction);
+
+				wrapper.appendChild(span);
+				container.appendChild(wrapper);
+
+				// Aggiunge uno spazio reale tra le parole per permettere il wrapping naturale
+				if (index < words.length - 1) {
+					container.appendChild(document.createTextNode(' '));
+				}
+			});
+
+			app.initObserver(container, onScroll);
+		},
+
+		//=== Reveal block ===\\
+		revealBlock: (elementId, direction = 'up', onScroll = true, startDelay = 0, duration = 0.8) => {
+			const container = document.getElementById(elementId);
+			if (!container) return;
+			const content = container.innerHTML;
+			container.innerHTML = '';
+			const wrapper = document.createElement('span');
+			wrapper.className = 'reveal-container reveal-block-wrapper';
+			
+			const span = document.createElement('span');
+			span.className = 'reveal-item';
+			span.style.display = 'block'; // Necessario per l'animazione di blocco
+			span.innerHTML = content;
+			span.style.transitionDuration = `${duration}s`;
+			span.style.transitionDelay = `${startDelay}s`;
+			span.style.transform = app.getStartTransform(direction);
+
+			wrapper.appendChild(span);
+			container.appendChild(wrapper);
+			app.initObserver(container, onScroll);
+		},
+
+		revealSvg: (elementId, onScroll = true, startDelay = 0, duration = 1.5, stagger = 0.2) => {
+			const container = document.getElementById(elementId);
+			if (!container) return;
+
+			const paths = container.querySelectorAll('path, circle, rect, polyline');
+
+			paths.forEach((path, index) => {
+				const length = path.getTotalLength();
+				
+				// 1. Reset immediato
+				path.style.transition = 'none'; // Disabilita transizioni per il reset
+				path.style.strokeDasharray = length;
+				path.style.strokeDashoffset = length;
+				path.classList.add('reveal-svg-path');
+				path.classList.remove('is-animated');
+
+				// 2. Forza il calcolo
+				path.getBoundingClientRect();
+
+				// 3. Applica i parametri di animazione dopo che il browser ha resettato
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						path.style.transition = ''; // Riabilita le transizioni del CSS
+						path.style.transitionDuration = `${duration}s`;
+						path.style.transitionDelay = `${startDelay + (index * stagger)}s`;
+						
+						// Se non dobbiamo aspettare lo scroll, attiva subito
+						if (!onScroll) path.classList.add('is-animated');
+					});
+				});
+			});
+
+			// 4. Observer per attivazione allo scroll
+			if (onScroll) {
+				const obs = new IntersectionObserver(entries => {
+					if (entries[0].isIntersecting) {
+						container.querySelectorAll('.reveal-svg-path').forEach(p => p.classList.add('is-animated'));
+						obs.unobserve(container);
+					}
+				}, { threshold: 0.2 });
+				obs.observe(container);
+			}
+		},
+
+		revealShLine: (elementId, onScroll = true, direction = 'right', startDelay = 0, duration = 2) => {
+			const container = document.getElementById(elementId);
+			if (!container) return console.error("Container non trovato");
+
+			if (direction === 'left') container.classList.add('dir-left');
+
+			const path = container.querySelector('path');
+			const length = path.getTotalLength();
+			
+			console.log("Lunghezza linea:", length); // Se stampa 0, il path non è caricato bene
+
+			path.style.strokeDasharray = length;
+			path.style.strokeDashoffset = length;
+
+			const activate = () => {
+				path.style.transition = `stroke-dashoffset ${duration}s ease-out ${startDelay}s`;
+				path.style.strokeDashoffset = "0";
+				path.classList.add('is-visible');
+			};
+
+
+			if (onScroll) {
+				const observer = new IntersectionObserver((entries) => {
+					if (entries[0].isIntersecting) {
+						activate();
+						observer.unobserve(container);
+					}
+				}, { threshold: 0.2 });
+				observer.observe(container);
+			} else {
+				activate();
+			}
+		},
+
+		revealFade: (elementId, onScroll = true, startDelay = 0, duration = 0.8, direction = 'up') => {
+			const el = document.getElementById(elementId);
+			if (!el) return;
+
+			// Imposta lo stato iniziale basato sulla direzione
+			el.classList.add('reveal-fade-in');
+			if (direction !== 'none') {
+				el.style.transform = app.getStartTransform(direction);
+			}
+
+			el.style.transitionDuration = `${duration}s`;
+			el.style.transitionDelay = `${startDelay}s`;
+
+			const activate = () => {
+				el.getBoundingClientRect(); // Forza il calcolo della posizione iniziale
+				el.classList.add('reveal-active');
+			};
+
+			if (onScroll) {
+				const observer = new IntersectionObserver((entries) => {
+					if (entries[0].isIntersecting) {
+						activate();
+						observer.unobserve(el);
+					}
+				}, { threshold: 0.0 });
+				observer.observe(el);
+			} else {
+				activate();
+			}
+		},
+
+		getStartTransform: (direction) => {
+			switch(direction) {
+				case 'up':    return 'translateY(110%)';
+				case 'down':  return 'translateY(-110%)';
+				case 'left':  return 'translateX(60px)';
+				case 'right': return 'translateX(-60px)';
+				default:      return 'translateY(110%)';
+			}
+		},
+
+		initObserver: (container, onScroll) => {
+			const activate = () => {
+				container.querySelectorAll('.reveal-item').forEach(el => el.classList.add('reveal-active'));
+			};
+			if (onScroll) {
+				const obs = new IntersectionObserver(entries => {
+					if (entries[0].isIntersecting) { activate(); obs.unobserve(container); }
+				}, { threshold: 0.2 });
+				obs.observe(container);
+			} else {
+				setTimeout(activate, 100);
+			}
+		}
+
+
 		
 	}
  

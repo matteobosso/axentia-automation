@@ -1622,17 +1622,17 @@ hr {
     width: 100%;
     z-index: 111;
     /* Aumentiamo il padding o l'altezza minima per dare spazio alla sfumatura */
-    /* padding: 1.25rem 0 6rem; 
+    padding: 1rem 0 5rem;
     font-family: var(--heading-font-family), sans-serif;
     font-size: 1rem;
-    color: var(--text-primary); */
+    color: var(--text-primary);
     
     /* Il bianco solido copre solo il top, la trasparenza inizia molto presto */
-    /* background: linear-gradient(to top, 
+    background: linear-gradient(to top, 
         rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.8) 80%, 
+        rgba(255, 255, 255, 0.8) 60%, 
         rgba(255, 255, 255, 1) 100%
-    ); */
+    );
 }
 
 .header-brand {
@@ -3656,7 +3656,7 @@ a.iitem {
 .brand-description {
   margin-left: 2px;
   padding: 1.5rem;
-  min-height: 14rem;
+  min-height: 20rem;
   background-color: var(--background);
   text-align: left;
 
@@ -3701,12 +3701,9 @@ a.iitem {
   color: var(--text-primary);
 }
 
-
-
 .bw-img {
     filter: grayscale(100%);
 }
-
 
 .brand-item {
     position: relative;
@@ -4168,4 +4165,93 @@ svg:hover .reveal-svg-path {
 
 #cc--main .cm__btn--primary {
     background-color: #000 !important; /* Colore nero minimal */
+}
+
+/* === 11. MOBILE OVERRIDES === */
+
+/* Rimozione margini personalizzati su mobile */
+@media (max-width: 768px) {
+    [style*="margin-left"]:not(.btn-icon-r45), [style*="margin-top"]:not(.btn-icon-r45), [style*="margin-right"]:not(.btn-icon-r45), [style*="padding-top"]:not(.btn-icon-r45) {
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+        margin-right: 0 !important;
+        padding-top: 0 !important;
+    }
+    h1 { line-height: 1.2 !important; }
+    h2 { font-size: 1.8rem !important; }
+    h3 { font-size: 1.4rem !important; }
+    .mnu-btn {
+        position: relative;
+        width: 2em;
+        min-width: 2em;
+        height: 2em;
+        overflow: hidden;
+        margin-right: 0.75em;
+        margin-top: 1rem;
+        cursor: pointer;
+        fill: var(--text-primary);
+    }
+    .blockquote {
+        margin-bottom: 3rem;
+        line-height: 1.2;
+    }
+}
+
+/* Ridimensionamento bottone circolare su mobile */
+
+@media (max-width: 768px) {
+    /* Rimpicciolisce il cerchio e il contenitore del bottone */
+    .btn-icon-r45 {
+        transform: scale(0.7); /* Riduce del 20% la dimensione totale */
+        margin-bottom: -5rem !important; /* Recupera lo spazio creato dallo scale */
+    }
+
+    /* Sistema il testo del bottone se diventa troppo piccolo */
+    .btn-text {
+        font-size: 14px !important;
+    }
+
+    .btn-submit {
+        transform: scale(0.7);
+    }
+
+    .btn-submit:hover {
+    transform: scale(0.6); /* Restringimento on hover */
+    }
+
+    .btn-submit:active {
+        transform: scale(0.55);
+    }
+}
+
+
+@media (max-width: 500px) {
+    .btn-icon-r45 {
+        margin-top: 1rem !important;
+    }
+}
+
+/* Aggiustamenti per il brand su mobile */
+@media (max-width: 900px) {
+    .brand-item img {
+        max-width: 95%;
+        max-height: 95%;
+    }
+
+    .brand-description h2 {
+        font-size: 1.25rem;
+        margin-top: -2rem;
+    }
+    .brand-description h3 {
+        font-size: 1.25rem;
+    }
+    .brand-description p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .brand-description {
+        min-height: 16rem;
+    }
 }
